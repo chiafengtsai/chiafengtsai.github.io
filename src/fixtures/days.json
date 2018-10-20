@@ -1,0 +1,30 @@
+[
+  {
+    "eng": "Sunday",
+    "kor": "일요일"
+  },
+  {
+    "eng": "Monday",
+    "kor": "월요일"
+  },
+  {
+    "eng": "Tuesday",
+    "kor": "도요일"
+  },
+  {
+    "eng": "Wednesday",
+    "kor": "수요일"
+  },
+  {
+    "eng": "Thursday",
+    "kor": "목요일"
+  },
+  {
+    "eng": "Friday",
+    "kor": "금요일"
+  },
+  {
+    "eng": "Saturday",
+    "kor": "토요일"
+  }
+]
