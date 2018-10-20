@@ -1,45 +1,44 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import days from './fixtures/days.json'
 
 
 class App extends Component {
-  constructor() {
-		super();
-		this.state = {
+  constructor(props) {
+    super(props);
+    this.state = {
+      days,
       showAnswer: false,
-      randomNumber: 'test'
-		};
+      randomNumber: Math.floor(Math.random() * 7) // should I put a function in a state?
+    }
   }
-  toggle() {
-		this.setState({
-			showAnswer: !this.state.showAnswer
-		});
-  }
-  change() {
 
+  showAnswerHandler() {
+    this.setState((state) => ({
+      showAnswer: !state.showAnswer
+    }));
   }
+
+  updateQuestion() {
+    this.setState(() => ({
+      randomNumber: Math.floor(Math.random() * 7),
+      showAnswer: false,
+    }));
+  } 
+  englishValue = () => this.state.days[this.state.randomNumber].eng
+  koreanValue = () => this.state.days[this.state.randomNumber].kor
   render() {
-    var display = {
-			display: this.state.showAnswer ? "block" : "none"
+    const display = {
+      display: this.state.showAnswer ? "block" : "none"
     }
-    function randomNumberGenerator () {
-      return Math.floor(Math.random() * 7)
-    }
-    const randomNumber = randomNumberGenerator ();
-    function showEnglish (arr) {
-      return arr[randomNumber].eng;
-    }
-    function showKorean (arr) {
-      return arr[randomNumber].kor;
-    }
-    
     return (
       <div className="App">
-        <h1 className="App-title">{showEnglish (days)}</h1>
-        <h3 className="App-sub-title" style={ display }>{showKorean (days)}</h3>
-        <button onClick={this.toggle.bind(this)}>Toggle</button>
+      {this.state.randomNumber}
+      
+        <p>{this.englishValue()}</p>
+        <p style={display}>{this.koreanValue()}</p>
+        <button onClick={this.showAnswerHandler.bind(this)}>See answer</button>
+        <button onClick={this.updateQuestion.bind(this)}>Next question</button>
       </div>
     );
   }
