@@ -2,6 +2,7 @@
   "name": "korean-web-app",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "http://bboys1101.github.io/korean-web-app",
   "dependencies": {
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
