@@ -1,45 +1,65 @@
-import React, { Component } from 'react';
-import './App.css';
-import days from './fixtures/days.json'
+import React, { Component } from "react";
+import TheHeader from "./components/TheHeader";
+import QuestionCard from "./components/QuestionCard";
+import MainButton from "./components/MainButton";
+import "./App.css";
+import days from "./fixtures/days.json";
 
-// https://www.youtube.com/watch?v=xa-_FIy2NgE
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      days,
-      showAnswer: false,
-      randomNumber: Math.floor(Math.random() * 7)
-    }
+  state = {
+    days,
+    showAnswer: false,
+    randomNumber: this.getRandomNumber()
+  };
+
+  getRandomNumber() {
+    return Math.floor(Math.random() * 7);
   }
 
-  showAnswerHandler() {
-    this.setState((state) => ({
+  showAnswer = () => {
+    this.setState(state => ({
       showAnswer: !state.showAnswer
     }));
-  }
+  };
 
-  updateQuestion() {
+  renderAnswer = () => {
+    if (!this.state.showAnswer) return "";
+    return this.koreanValue();
+  };
+
+  updateQuestion = () => {
     this.setState(() => ({
-      randomNumber: Math.floor(Math.random() * 7),
-      showAnswer: false,
+      randomNumber: this.getRandomNumber(),
+      showAnswer: false
     }));
-  }
+  };
 
-  englishValue = () => this.state.days[this.state.randomNumber].eng
-  koreanValue = () => this.state.days[this.state.randomNumber].kor
+  returnValue = () => {
+    return this.state.days[this.state.randomNumber];
+  };
+
+  vocabularies = () => {
+    return {
+      english: () => this.returnValue().eng,
+      korean: () => this.returnValue().kor
+    };
+  };
+
+  englishValue = () => {
+    return this.returnValue().eng;
+  };
+
+  koreanValue = () => {
+    return this.returnValue().kor;
+  };
+
   render() {
-    const display = {
-      display: this.state.showAnswer ? "block" : "none" // not sure about this one.
-    }
     return (
       <div className="App">
-      {this.state.randomNumber}
-      
-        <p>{this.englishValue()}</p>
-        <p style={display}>{this.koreanValue()}</p>
-        <button onClick={this.showAnswerHandler.bind(this)}>See answer</button>
-        <button onClick={this.updateQuestion.bind(this)}>Next question</button>
+        <TheHeader />
+        <QuestionCard englishValue={this.englishValue()} />
+        <p>{this.renderAnswer()}</p>
+        <MainButton updateQuestion={() => this.updateQuestion()} />
       </div>
     );
   }
