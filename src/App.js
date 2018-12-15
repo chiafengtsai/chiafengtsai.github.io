@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import TheHeader from "./components/TheHeader";
 import QuestionCard from "./components/QuestionCard";
 import MainButton from "./components/MainButton";
+import Answer from "./components/Answer";
+import AnswerButton from "./components/AnswerButton";
 import "./App.css";
 import days from "./fixtures/days.json";
 
@@ -16,10 +18,9 @@ class App extends Component {
     return Math.floor(Math.random() * 7);
   }
 
-  showAnswer = () => {
-    this.setState(state => ({
-      showAnswer: !state.showAnswer
-    }));
+  toggleAnswer = () => {
+    const showAnswer = !this.state.showAnswer;
+    this.setState(state => ({ showAnswer }));
   };
 
   renderAnswer = () => {
@@ -56,10 +57,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Answer value={this.koreanValue()} showAnswer={this.state.showAnswer} />
         <TheHeader />
         <QuestionCard englishValue={this.englishValue()} />
-        <p>{this.renderAnswer()}</p>
         <MainButton updateQuestion={() => this.updateQuestion()} />
+        <AnswerButton
+          toggleAnswer={() => this.toggleAnswer()}
+          showAnswer={this.state.showAnswer}
+        />
       </div>
     );
   }
