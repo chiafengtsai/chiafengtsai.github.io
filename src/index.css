@@ -9,6 +9,9 @@ body {
   background-color: #fafafa;
   height: 100%;
   font-family: "Roboto", sans-serif;
+  max-width: 768px;
+  position: relative;
+  margin: auto;
 }
 
 .App {
@@ -64,6 +67,12 @@ body {
   height: 268px;
 }
 
+@media only screen and (max-width: 600px) {
+  .question-card {
+    height: calc(100vh - 300px);
+  }
+}
+
 .question-card__subtitle {
   font-size: 16px;
   color: #5a5a5a;
@@ -83,12 +92,6 @@ body {
 .main-content--activated {
   transform: translateY(0);
   opacity: 1;
-}
-
-.question-card--animate {
-  animation-name: animate;
-  animation-duration: 0.3s;
-  animation-timing-function: ease-in-out;
 }
 
 .main-button {
@@ -131,6 +134,8 @@ body {
   top: 100%;
   background-color: #f0f0f0;
   transition: all 0.15s ease-out;
+  left: 0;
+  right: 0;
 }
 
 .answer-wrap--show {
@@ -170,6 +175,7 @@ body {
   bottom: 0;
   z-index: 3;
   transition: all 0.1s ease-out;
+  left: 0;
 }
 
 .answer-button--activated {
