@@ -11,7 +11,8 @@ class App extends Component {
   state = {
     days,
     showAnswer: false,
-    randomNumber: this.getRandomNumber()
+    randomNumber: this.getRandomNumber(),
+    questionCardVisble: true
   };
 
   getRandomNumber() {
@@ -23,16 +24,16 @@ class App extends Component {
     this.setState(state => ({ showAnswer }));
   };
 
-  renderAnswer = () => {
-    if (!this.state.showAnswer) return "";
-    return this.koreanValue();
-  };
-
   updateQuestion = () => {
-    this.setState(() => ({
-      randomNumber: this.getRandomNumber(),
-      showAnswer: false
-    }));
+    const randomNumber = this.getRandomNumber();
+    this.setState({ randomNumber });
+
+    let questionCardVisble = !this.state.questionCardVisble;
+    this.setState({ questionCardVisble });
+    setTimeout(() => {
+      questionCardVisble = !questionCardVisble;
+      this.setState({ questionCardVisble });
+    }, 100);
   };
 
   returnValue = () => {
@@ -59,7 +60,10 @@ class App extends Component {
       <div className="App">
         <Answer value={this.koreanValue()} showAnswer={this.state.showAnswer} />
         <TheHeader />
-        <QuestionCard englishValue={this.englishValue()} />
+        <QuestionCard
+          englishValue={this.englishValue()}
+          isVisible={this.state.questionCardVisble}
+        />
         <MainButton updateQuestion={() => this.updateQuestion()} />
         <AnswerButton
           toggleAnswer={() => this.toggleAnswer()}

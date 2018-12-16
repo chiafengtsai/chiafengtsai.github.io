@@ -3,7 +3,6 @@ import React, { Component } from "react";
 class Answer extends Component {
   render() {
     let classes = "answer-wrap ";
-    console.log(this.props.showAnswer);
     if (this.props.showAnswer) classes += "answer-wrap--show";
     return (
       <div className={classes}>
